@@ -1,5 +1,5 @@
 const { hashPassword } = require("../helpers/bcrypt");
-const { User } = require("../models");
+const { User, Post } = require("../models");
 
 class Controller {
   static async getUser(req, res, next) {
@@ -17,7 +17,10 @@ class Controller {
   static async userById(req, res, next) {
     try {
       const id = req.user.id;
-      const user = await User.findOne({ where: { id } });
+      const user = await User.findOne({
+        where: { id },
+        include: [{ model: Post }],
+      });
       if (!user) {
         throw { name: "NotFound" };
       }
