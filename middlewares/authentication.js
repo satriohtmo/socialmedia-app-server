@@ -1,7 +1,7 @@
 const { readToken } = require("../helpers/jwt");
 const { User } = require("../models");
 
-const authentication = async (req, res, nect) => {
+const authentication = async (req, res, next) => {
   try {
     const { access_token } = req.headers;
     const token = readToken(access_token);
