@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "apaya";
+const dotenv = require("dotenv");
+dotenv.config();
+const secretKey = process.env.SECRET_KEY;
 
 function generateToken(payload) {
-  jwt.sign(payload, SECRET_KEY);
+  return jwt.sign(payload, secretKey);
 }
 
 function readToken(token) {
-  jwt.verify(token, SECRET_KEY);
+  return jwt.verify(token, secretKey);
 }
 
 module.exports = {
