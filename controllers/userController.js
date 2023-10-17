@@ -1,5 +1,5 @@
 const { hashPassword } = require("../helpers/bcrypt");
-const { User, Post } = require("../models");
+const { User, Comment } = require("../models");
 
 class Controller {
   static async getUser(req, res, next) {
@@ -19,7 +19,7 @@ class Controller {
       const id = req.user.id;
       const user = await User.findOne({
         where: { id },
-        include: [{ model: Post }],
+        include: [{ model: Comment }],
       });
       if (!user) {
         throw { name: "NotFound" };

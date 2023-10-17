@@ -1,9 +1,11 @@
-const { Post, sequelize } = require("../models");
+const { Post, sequelize, User, Comment } = require("../models");
 
 class Controller {
   static async getAllPost(req, res, next) {
     try {
-      const content = await Post.findAll();
+      const content = await Post.findAll({
+        include: [{ model: Comment }, { model: User }],
+      });
       res.status(200).json({ data: content });
     } catch (err) {
       next(err);
