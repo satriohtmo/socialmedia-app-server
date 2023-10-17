@@ -14,10 +14,10 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       const id = req.user.id;
-      const { photo, description } = req.body;
+      const { description } = req.body;
       const newContent = await Post.create(
         {
-          photo,
+          photo: req.file.path,
           description,
           UserId: +id,
         },
@@ -37,10 +37,10 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       const { id } = req.params;
-      const { photo, description } = req.body;
+      const { description } = req.body;
       const updateContent = await Post.update(
         {
-          photo,
+          photo: req.file.path,
           description,
         },
         {

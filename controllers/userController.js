@@ -50,7 +50,7 @@ class Controller {
       if (!user) {
         throw { name: "NotFound" };
       }
-      const { username, name, email, password, dateofbirth, profilepicture } = req.body;
+      const { username, name, email, password, dateofbirth } = req.body;
       const updateUser = await User.update(
         {
           username,
@@ -58,7 +58,7 @@ class Controller {
           email,
           password,
           dateofbirth,
-          profilepicture,
+          profilepicture: req.file.path,
         },
         { where: { id }, individualHooks: true }
       );
