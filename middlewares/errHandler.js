@@ -25,6 +25,9 @@ const errorHandler = (err, req, res, next) => {
     case "NotFound":
       res.status(404).json({ statusCode: 404, message: "Data not found" });
       break;
+    case "NotFollowing":
+      res.status(404).json({ statusCode: 404, message: "You are not following" });
+      break;
     default:
       res.status(500).json({ statusCode: 500, message: "Internal Server Error" });
       break;
