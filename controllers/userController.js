@@ -1,5 +1,5 @@
 const { hashPassword } = require("../helpers/bcrypt");
-const { User, Comment } = require("../models");
+const { User, Comment, Follow } = require("../models");
 
 class Controller {
   static async getUser(req, res, next) {

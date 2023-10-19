@@ -5,7 +5,7 @@ const { User } = require("../models");
 class Controller {
   static async register(req, res, next) {
     try {
-      const { username, name, email, password, dateofbirth, profilepicture } = req.body;
+      const { username, name, email, password, dateofbirth } = req.body;
 
       const newUser = await User.create({
         username,
@@ -13,7 +13,7 @@ class Controller {
         email,
         password,
         dateofbirth,
-        profilepicture,
+        profilepicture: req.file.path,
       });
       res.status(201).json({ message: `New user with id ${newUser.id} created.` });
     } catch (err) {
