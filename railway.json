@@ -1,0 +1,12 @@
+{
+  "services": {
+    "backend": {
+      "startCommand": "node app.js",
+      "env": {
+        "DB_URL": "postgres://postgres:Bulldogz@localhost:5432/sosmed",
+        "PORT": 14045,
+        "SECRET_KEY": "apaya"
+      }
+    }
+  }
+}
