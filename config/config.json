@@ -5,5 +5,12 @@
     "database": "sosmed",
     "host": "127.0.0.1",
     "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "EEf-fCBc5*b4eED1F32F1gA5Ag1e43Cg",
+    "database": "railway",
+    "host": "monorail.proxy.rlwy.net",
+    "dialect": "postgres"
   }
 }
