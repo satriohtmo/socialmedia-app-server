@@ -3,7 +3,7 @@
     "backend": {
       "startCommand": "node app.js",
       "env": {
-        "DB_URL": "postgres://postgres:Bulldogz@localhost:5432/sosmed",
+        "DB_URL": "postgresql://postgres:c*d5GBdGd3FG3D5g3gFFF6Bb*62Bd-c4@monorail.proxy.rlwy.net:34658/railway",
         "PORT": 14045,
         "SECRET_KEY": "apaya"
       }
