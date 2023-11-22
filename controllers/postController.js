@@ -5,8 +5,24 @@ class Controller {
     try {
       const content = await Post.findAll({
         include: [{ model: Comment }, { model: User }, { model: Like }],
+        order: [["id", "DESC"]],
       });
       res.status(200).json({ data: content });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async contentById(req, res, next) {
+    try {
+      const { id } = req.params;
+      const contentById = await Post.findByPk(id, {
+        include: [{ model: Like }, { model: User }, { model: Comment, include: [{ model: User }] }],
+      });
+      if (!contentById) {
+        throw { name: "NotFound" };
+      }
+      res.status(200).json({ data: contentById });
     } catch (err) {
       next(err);
     }
@@ -16,13 +32,14 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       const id = req.user.id;
-      const { description } = req.body;
+      const { photo, description } = req.body;
       const newContent = await Post.create(
         {
-          photo: req.file.path,
+          photo,
           description,
           UserId: +id,
         },
+
         {
           transaction: t,
         }
@@ -39,10 +56,10 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       const { id } = req.params;
-      const { description } = req.body;
+      const { photo, description } = req.body;
       const updateContent = await Post.update(
         {
-          photo: req.file.path,
+          photo,
           description,
         },
         {

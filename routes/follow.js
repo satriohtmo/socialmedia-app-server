@@ -3,13 +3,13 @@ const router = express.Router();
 const followController = require("../controllers/followController");
 const authentication = require("../middlewares/authentication");
 
-router.get("/following", followController.follow);
-router.get("/follower", followController.getFollowers);
+router.get("/following/:id", followController.getFollowing);
+router.get("/followers/:id", followController.getFollowers);
 router.use(authentication);
-router.get("/user/following", followController.userFollowing);
-router.get("/user/follower", followController.userFollower);
+router.get("/following", followController.userFollowing);
+router.get("/followers", followController.userFollower);
 router.get("/sum", followController.sumFollowingAndFollowers);
-router.post("/following", followController.followingUser);
-router.delete("/", followController.unFollowUser);
+router.post("/follow", followController.followingUser);
+router.delete("/unfollow", followController.unFollowUser);
 
 module.exports = router;

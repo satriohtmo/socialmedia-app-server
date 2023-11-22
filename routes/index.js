@@ -15,6 +15,6 @@ router.use("/api/user", user);
 router.use("/api/content", post);
 router.use("/api/comment", comment);
 router.use("/api/like", like);
-router.use("/api/follow", follow);
+router.use("/api", follow);
 
 module.exports = router;

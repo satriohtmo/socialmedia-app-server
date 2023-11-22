@@ -1,6 +1,4 @@
-# socialmedia-app-server
-
-photo share app wanna be ig clone
+Captiverse Backend
 
 Tech Stack :
 
@@ -11,7 +9,7 @@ Tech Stack :
 - Bcrypt (Hashing Password)
 - JsonWebToken (Token)
 
-To run this server
+To run this server :
 
 - create file .env
 - set config reference at .env.example

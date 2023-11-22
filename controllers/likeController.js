@@ -16,9 +16,9 @@ class Controller {
       const like = await Like.sum("like", {
         where: { PostId: post.id },
       });
-      if (!like) {
-        throw { name: "NotFound" };
-      }
+      // if (!like) {
+      //   throw { name: "NotFound" };
+      // }
       //   const like = await Like.sum("like", {
       //     include: [{ model: Post }, { model: User }],
       //     group: ["Post.id", "User.id", "Like.id"],
@@ -44,6 +44,19 @@ class Controller {
     }
   }
 
+  static async getContentLikedByUser(req, res, next) {
+    try {
+      const { id } = req.user;
+      const content = await Like.findAll({
+        where: { UserId: id },
+        include: [{ model: Post }],
+      });
+      res.status(200).json({ data: content });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async addLikeToPost(req, res, next) {
     try {
       const userId = req.user.id;
@@ -63,10 +76,26 @@ class Controller {
   static async dislikePost(req, res, next) {
     try {
       const { id } = req.params;
-      //   const post = await Post.findByPk(id);
-      const dislikePost = await Like.destroy({ where: { id } });
-      res.status(200).json({ message: "Dislike completed" });
-    } catch (err) {}
+
+      // Assuming Like and Post models are associated somehow
+      // Fetch the post by its ID
+      const post = await Post.findByPk(id);
+
+      // Find and delete the associated like for the specific user
+      const deletedLike = await Like.destroy({ where: { PostId: post.id, UserId: req.user.id } });
+
+      if (deletedLike) {
+        // Decrement the likes count in the post by 1 if a like was deleted
+        post.likes -= 1; // Assuming you have a 'likes' field in your Post model
+        await post.save();
+
+        res.status(200).json({ message: "Dislike completed", deletedLike });
+      } else {
+        res.status(404).json({ message: "Like not found for this user and post" });
+      }
+    } catch (err) {
+      next(err);
+    }
   }
 }
 

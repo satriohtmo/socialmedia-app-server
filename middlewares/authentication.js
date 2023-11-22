@@ -9,7 +9,7 @@ const authentication = async (req, res, next) => {
     if (!user) {
       throw { name: "Unauthorized" };
     }
-    req.user = { id: user.id };
+    req.user = { id: user.id, email: user.email, username: user.username };
     next();
   } catch (err) {
     next(err);

@@ -5,10 +5,11 @@ const upload = require("../middlewares/multer");
 const authentication = require("../middlewares/authentication");
 
 router.get("/all", userController.getUser);
-router.get("/:name", userController.getUserByName);
+router.get("/:username", userController.getUserByName);
 router.use(authentication);
-router.get("/", userController.userById);
-router.put("/", upload.single("profilepicture"), userController.updateUser);
+// router.get("/", userController.getUserLikes);
+router.get("/", userController.getUserByUsername);
+router.put("/", userController.updateUser);
 router.delete("/", userController.deleteUser);
 
 module.exports = router;

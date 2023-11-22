@@ -5,15 +5,14 @@ const { User } = require("../models");
 class Controller {
   static async register(req, res, next) {
     try {
-      const { username, name, email, password, dateofbirth } = req.body;
-
+      const { username, name, email, password, bio, profilepicture } = req.body;
       const newUser = await User.create({
         username,
         name,
         email,
         password,
-        dateofbirth,
-        profilepicture: req.file.path,
+        bio,
+        profilepicture,
       });
       res.status(201).json({ message: `New user with id ${newUser.id} created.` });
     } catch (err) {

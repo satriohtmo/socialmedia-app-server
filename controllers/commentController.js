@@ -40,7 +40,7 @@ class Controller {
           where: { id },
         }
       );
-      res.status(201).json({ message: `comment with id ${id} has been edited` });
+      res.status(201).json({ message: `comment with id ${editedComment.id} has been edited` });
     } catch (err) {
       next(err);
     }
