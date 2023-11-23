@@ -7,10 +7,6 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "EEf-fCBc5*b4eED1F32F1gA5Ag1e43Cg",
-    "database": "railway",
-    "host": "monorail.proxy.rlwy.net",
-    "dialect": "postgres"
+    "use_env_variable": "DB_URL"
   }
 }
