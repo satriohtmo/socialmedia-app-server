@@ -1,10 +1,11 @@
+if (process.env.NODE_ENV === "development") {
+  require("dotenv").config();
+}
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const routes = require("./routes");
-const dotenv = require("dotenv");
-dotenv.config();
-const port = process.env.PORT;
+const port = process.env.PORT || 14045;
 const errHandler = require("./middlewares/errHandler");
 
 app.use(cors());
