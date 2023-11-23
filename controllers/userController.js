@@ -113,23 +113,16 @@ class Controller {
   static async updateUser(req, res, next) {
     try {
       const userName = req.user.username;
-      // const user = await User.findOne({
-      //   where: { username: userName },
-      // });
-      // if (!user) {
-      //   throw { name: "NotFound" };
-      // }
-      const { username, name, email, password, bio, profilepicture } = req.body;
+      const { username, name, email, bio, profilepicture } = req.body;
       const updateUser = await User.update(
         {
           username,
           name,
           email,
-          password,
           bio,
           profilepicture,
         },
-        { where: { username: userName }, individualHooks: true }
+        { where: { username: userName } }
       );
       res.status(201).json({ message: `user with ${userName} has been updated` });
     } catch (err) {
